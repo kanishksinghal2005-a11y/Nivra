@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:nivra/Screens/Complaint/new_complaint_screen.dart';
 import 'package:nivra/Widgets/navbar.dart';
 import 'package:nivra/Widgets/quick_action_card.dart';
 import 'package:nivra/widgets/dashboard_appbar.dart';
@@ -20,7 +20,6 @@ class DashboardScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-
               /// Dashboard App Bar
               const DashboardAppBar(),
 
@@ -29,37 +28,36 @@ class DashboardScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 child: GridView.count(
                   shrinkWrap: true,
-                  physics:
-                      const NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
 
                   crossAxisCount: 2,
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
 
                   children: [
-
                     QuickActionCard(
                       icon: Icons.add,
                       title: "New\nComplaint",
-                      backgroundColor:
-                          const Color(0xff1554D1),
-                      iconBackgroundColor:
-                          Colors.white24,
+                      backgroundColor: const Color(0xff1554D1),
+                      iconBackgroundColor: Colors.white24,
                       iconColor: Colors.white,
                       textColor: Colors.white,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const NewComplaintScreen(),
+                          ),
+                        );
+                      },
                     ),
 
                     QuickActionCard(
-                      icon:
-                          Icons.track_changes_outlined,
+                      icon: Icons.track_changes_outlined,
                       title: "Complaint\nStatus",
-                      backgroundColor:
-                          Colors.white,
-                      iconBackgroundColor:
-                          const Color(0xffEDF3FF),
-                      iconColor:
-                          const Color(0xff1554D1),
+                      backgroundColor: Colors.white,
+                      iconBackgroundColor: const Color(0xffEDF3FF),
+                      iconColor: const Color(0xff1554D1),
                       textColor: Colors.black,
                       onTap: () {},
                     ),
@@ -67,26 +65,19 @@ class DashboardScreen extends StatelessWidget {
                     QuickActionCard(
                       icon: Icons.history,
                       title: "History",
-                      backgroundColor:
-                          Colors.white,
-                      iconBackgroundColor:
-                          const Color(0xffEDF3FF),
-                      iconColor:
-                          const Color(0xff1554D1),
+                      backgroundColor: Colors.white,
+                      iconBackgroundColor: const Color(0xffEDF3FF),
+                      iconColor: const Color(0xff1554D1),
                       textColor: Colors.black,
                       onTap: () {},
                     ),
 
                     QuickActionCard(
-                      icon:
-                          Icons.person_outline,
+                      icon: Icons.person_outline,
                       title: "Profile",
-                      backgroundColor:
-                          Colors.white,
-                      iconBackgroundColor:
-                          const Color(0xffEDF3FF),
-                      iconColor:
-                          const Color(0xff1554D1),
+                      backgroundColor: Colors.white,
+                      iconBackgroundColor: const Color(0xffEDF3FF),
+                      iconColor: const Color(0xff1554D1),
                       textColor: Colors.black,
                       onTap: () {},
                     ),
@@ -96,16 +87,12 @@ class DashboardScreen extends StatelessWidget {
 
               /// Statistics Section
               const Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     "Statistics",
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -113,19 +100,14 @@ class DashboardScreen extends StatelessWidget {
               const SizedBox(height: 16),
 
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(
-                  horizontal: 16,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
                   children: [
-
                     Expanded(
                       child: StatisticsCard(
                         title: "Pending",
                         value: "12",
-                        valueColor:
-                            Colors.orange,
+                        valueColor: Colors.orange,
                       ),
                     ),
 
@@ -135,8 +117,7 @@ class DashboardScreen extends StatelessWidget {
                       child: StatisticsCard(
                         title: "Resolved",
                         value: "48",
-                        valueColor:
-                            Colors.green,
+                        valueColor: Colors.green,
                       ),
                     ),
                   ],
@@ -146,19 +127,14 @@ class DashboardScreen extends StatelessWidget {
               const SizedBox(height: 12),
 
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(
-                  horizontal: 16,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
                   children: [
-
                     Expanded(
                       child: StatisticsCard(
                         title: "In Progress",
                         value: "7",
-                        valueColor:
-                            Colors.blue,
+                        valueColor: Colors.blue,
                       ),
                     ),
 
@@ -168,8 +144,7 @@ class DashboardScreen extends StatelessWidget {
                       child: StatisticsCard(
                         title: "Total",
                         value: "67",
-                        valueColor:
-                            Colors.black,
+                        valueColor: Colors.black,
                       ),
                     ),
                   ],
@@ -182,18 +157,12 @@ class DashboardScreen extends StatelessWidget {
 
               /// Recent Activity
               const Padding(
-                padding:
-                    EdgeInsets.symmetric(
-                  horizontal: 16,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     "Recent Activity",
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -201,22 +170,15 @@ class DashboardScreen extends StatelessWidget {
               const SizedBox(height: 16),
 
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(
-                  horizontal: 16,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   children: [
-
                     RecentActivityCard(
-                      title:
-                          "Water Supply Issue",
+                      title: "Water Supply Issue",
                       category: "Utilities",
-                      date:
-                          "Today • 10:30 AM",
+                      date: "Today • 10:30 AM",
                       status: "Pending",
-                      statusColor:
-                          Colors.orange,
+                      statusColor: Colors.orange,
                       onTap: () {},
                     ),
 
@@ -224,13 +186,10 @@ class DashboardScreen extends StatelessWidget {
 
                     RecentActivityCard(
                       title: "Road Damage",
-                      category:
-                          "Infrastructure",
-                      date:
-                          "Yesterday • 4:15 PM",
+                      category: "Infrastructure",
+                      date: "Yesterday • 4:15 PM",
                       status: "Resolved",
-                      statusColor:
-                          Colors.green,
+                      statusColor: Colors.green,
                       onTap: () {},
                     ),
                   ],
@@ -242,30 +201,24 @@ class DashboardScreen extends StatelessWidget {
           ),
         ),
       ),
-            /// NOVA AI Assistant Button
+
+      /// NOVA AI Assistant Button
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (_) => const NovaScreen(),
-            ),
+            MaterialPageRoute(builder: (_) => const NovaScreen()),
           );
         },
 
-        backgroundColor:
-            const Color(0xff1554D1),
+        backgroundColor: const Color(0xff1554D1),
 
         elevation: 6,
 
-        child: const Icon(
-          Icons.auto_awesome,
-          color: Colors.white,
-        ),
+        child: const Icon(Icons.auto_awesome, color: Colors.white),
       ),
 
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniEndFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
 
       /// Bottom Navigation
       bottomNavigationBar: Navbar(
