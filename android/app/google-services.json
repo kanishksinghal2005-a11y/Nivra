@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "753042715008",
+    "project_id": "nivra-575dc",
+    "storage_bucket": "nivra-575dc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:753042715008:android:3a4efe35745fe83d745165",
+        "android_client_info": {
+          "package_name": "com.example.nivra"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6yW3eLHg1foxQQKs-0QZnUR2D8KJtahc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

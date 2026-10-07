@@ -1,45 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:nivra/Screens/Complaint/new_complaint_screen.dart';
 import 'package:nivra/Widgets/navbar.dart';
 import 'package:nivra/Widgets/quick_action_card.dart';
 import 'package:nivra/widgets/dashboard_appbar.dart';
 import 'package:nivra/widgets/statistics_card.dart';
 import 'package:nivra/widgets/recent_activity_card.dart';
-import '../Complaint/new_complaint_screen.dart';
-import 'package:nivra/Screens/History/history_screen.dart';
-import 'package:nivra/Screens/Status/complaint_status_screen.dart';
-import 'package:nivra/Screens/Profile/profile_screen.dart';
-import 'package:nivra/Screens/Notifications/notifications_screen.dart';
-import 'package:nivra/models/complaint.dart';
 
-class DashboardScreen extends StatefulWidget {
+import 'package:nivra/Screens/Nova/nova_screen.dart';
+
+class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
 
   @override
-  State<DashboardScreen> createState() => _DashboardScreenState();
-}
-
-class _DashboardScreenState extends State<DashboardScreen> {
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    setState(() {});
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final complaints = ComplaintStore.complaints;
-
-    final pendingCount = complaints.where((c) => c.status == 'Pending').length;
-
-    final resolvedCount = complaints
-        .where((c) => c.status == 'Resolved')
-        .length;
-
-    final inProgressCount = complaints
-        .where((c) => c.status == 'In Progress')
-        .length;
-
-    final totalCount = complaints.length;
     return Scaffold(
       backgroundColor: const Color(0xffF8FAFC),
 
@@ -75,9 +48,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           MaterialPageRoute(
                             builder: (context) => const NewComplaintScreen(),
                           ),
-                        ).then((_) {
-                          setState(() {});
-                        });
+                        );
                       },
                     ),
 
@@ -88,14 +59,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       iconBackgroundColor: const Color(0xffEDF3FF),
                       iconColor: const Color(0xff1554D1),
                       textColor: Colors.black,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ComplaintStatusScreen(),
-                          ),
-                        );
-                      },
+                      onTap: () {},
                     ),
 
                     QuickActionCard(
@@ -105,14 +69,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       iconBackgroundColor: const Color(0xffEDF3FF),
                       iconColor: const Color(0xff1554D1),
                       textColor: Colors.black,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const HistoryScreen(),
-                          ),
-                        );
-                      },
+                      onTap: () {},
                     ),
 
                     QuickActionCard(
@@ -122,14 +79,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       iconBackgroundColor: const Color(0xffEDF3FF),
                       iconColor: const Color(0xff1554D1),
                       textColor: Colors.black,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ProfileScreen(),
-                          ),
-                        );
-                      },
+                      onTap: () {},
                     ),
                   ],
                 ),
@@ -156,7 +106,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Expanded(
                       child: StatisticsCard(
                         title: "Pending",
-                        value: pendingCount.toString(),
+                        value: "12",
                         valueColor: Colors.orange,
                       ),
                     ),
@@ -166,7 +116,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Expanded(
                       child: StatisticsCard(
                         title: "Resolved",
-                        value: resolvedCount.toString(),
+                        value: "48",
                         valueColor: Colors.green,
                       ),
                     ),
@@ -183,7 +133,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Expanded(
                       child: StatisticsCard(
                         title: "In Progress",
-                        value: inProgressCount.toString(),
+                        value: "7",
                         valueColor: Colors.blue,
                       ),
                     ),
@@ -193,7 +143,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Expanded(
                       child: StatisticsCard(
                         title: "Total",
-                        value: totalCount.toString(),
+                        value: "67",
                         valueColor: Colors.black,
                       ),
                     ),
@@ -203,8 +153,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
               const SizedBox(height: 30),
 
-              /// (We'll add StatisticsCard widgets here next.)
               const SizedBox(height: 30),
+
+              /// Recent Activity
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Align(
@@ -221,34 +172,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
-                  children: ComplaintStore.complaints.isEmpty
-                      ? [
-                          const Text(
-                            'No recent complaints',
-                            style: TextStyle(color: Colors.grey, fontSize: 16),
-                          ),
-                        ]
-                      : ComplaintStore.complaints.reversed.take(3).map((
-                          complaint,
-                        ) {
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 14),
-                            child: RecentActivityCard(
-                              title: complaint.title,
-                              category: 'Complaint',
-                              date: complaint.submittedAt.toString(),
-                              status: complaint.status,
-                              statusColor: complaint.status == 'Resolved'
-                                  ? Colors.green
-                                  : complaint.status == 'In Progress'
-                                  ? Colors.blue
-                                  : complaint.status == 'Pending'
-                                  ? Colors.orange
-                                  : Colors.grey,
-                              onTap: () {},
-                            ),
-                          );
-                        }).toList(),
+                  children: [
+                    RecentActivityCard(
+                      title: "Water Supply Issue",
+                      category: "Utilities",
+                      date: "Today • 10:30 AM",
+                      status: "Pending",
+                      statusColor: Colors.orange,
+                      onTap: () {},
+                    ),
+
+                    const SizedBox(height: 14),
+
+                    RecentActivityCard(
+                      title: "Road Damage",
+                      category: "Infrastructure",
+                      date: "Yesterday • 4:15 PM",
+                      status: "Resolved",
+                      statusColor: Colors.green,
+                      onTap: () {},
+                    ),
+                  ],
                 ),
               ),
 
@@ -257,43 +201,30 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ),
       ),
+
+      /// NOVA AI Assistant Button
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Open camera
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const NovaScreen()),
+          );
         },
+
         backgroundColor: const Color(0xff1554D1),
+
         elevation: 6,
-        child: const Icon(Icons.camera_alt, color: Colors.white),
+
+        child: const Icon(Icons.auto_awesome, color: Colors.white),
       ),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
+
+      /// Bottom Navigation
       bottomNavigationBar: Navbar(
         currentIndex: 0,
         onTap: (index) {
-          if (index == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ComplaintStatusScreen(),
-              ),
-            );
-          }
-
-          if (index == 2) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const NotificationsScreen(),
-              ),
-            );
-          }
-
-          if (index == 3) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const ProfileScreen()),
-            );
-          }
+          // Navigation will be added later
         },
       ),
     );
